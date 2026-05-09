@@ -49,4 +49,17 @@ todos.patch('/:id', async (c) => {
 	return c.json(updatedTodo);
 });
 
+// Todoの削除
+todos.delete('/:id', (c) => {
+	const id = Number(c.req.param('id'));
+	const todo = todoList.find((todo) => todo.id === id);
+
+	if (!todo) {
+		return c.json({ error: 'Todo not found' }, 404);
+	}
+	// 配列から削除
+	todoList = todoList.filter((todo) => todo.id !== id);
+	return c.json({ message: 'Todo deleted' });
+});
+
 export default todos;
