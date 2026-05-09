@@ -1,11 +1,10 @@
 import { Hono } from 'hono';
 import { serve } from '@hono/node-server';
+import todos from './routes/todos';
 
 const app = new Hono();
 
-app.get('/', (c) => {
-	return c.text('Hello, Hono!');
-});
+app.route('/todos', todos);
 
 serve(
 	{
