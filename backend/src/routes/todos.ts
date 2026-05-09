@@ -20,4 +20,16 @@ todos.get('/', (c) => {
 	return c.json(todoList);
 });
 
+// Todoの新規作成
+todos.post('/', async (c) => {
+	const body = await c.req.json();
+	const newTodo: Todo = {
+		id: (todoList.length + 1).toString(),
+		title: body.title,
+		completed: false,
+	};
+	todoList.push(newTodo);
+	return c.json(newTodo);
+});
+
 export default todos;
